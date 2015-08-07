@@ -1,3 +1,7 @@
+// @TODO list
+// - Add $(selector) as an option
+// - Add openAnimation as an option
+
 // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
 // 'container' and adds remote HTML to it).
 var Modal = function(options) {
@@ -5,7 +9,7 @@ var Modal = function(options) {
 
   var defaults = {
     backdrop: 'static', // [BS setting] boolean or the string 'static'
-    keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed 
+    keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed
     element: '#ajax-modal', // the selector for the modal (the container on the DOM)
     reload: false, // reload page when closing the modal
     position: 'default', // position of the modal (can be 'default' or 'right')
@@ -44,7 +48,7 @@ var Modal = function(options) {
     $backdrop = $('.modal-backdrop');
 
     // Dismiss the modal when clicking on the backdrop
-    $backdrop.click(function() { self.dismiss() });
+    $backdrop.click(function() { self.dismiss(); });
 
     this.afterShow();
 
@@ -68,7 +72,7 @@ var Modal = function(options) {
       $element.removeClass(self.options.closeAnimation);
       self.options.closeAnimation = '';
 
-      if (self.options.reload) { location.reload() }
+      if (self.options.reload) { location.reload(); }
     }, 200);
   };
 
@@ -85,7 +89,7 @@ var Modal = function(options) {
       e.preventDefault();
       self.dismiss();
     });
-  }
+  };
 
   // Capture events to check if ESC key was pressed
   $(document).keyup(function(event) {
@@ -98,7 +102,7 @@ var Modal = function(options) {
   $(document).click(function(e){
     if (self.options.position === 'default') {
       // Check if click was not triggered on or within .modal-dialog
-      if (!$(e.target).closest('.modal-dialog').length > 0) self.dismiss();
+      if ($(e.target).closest('.modal-dialog').length == 0) self.dismiss();
     }
   });
 }
