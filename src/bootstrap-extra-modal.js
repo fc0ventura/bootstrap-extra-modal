@@ -1,6 +1,7 @@
-// @TODO list
-// - Add $(selector) as an option
-// - Add openAnimation as an option
+// @TODO Transform this info a jQuery Plugin
+// @TODO Add $(selector) as an option
+// @TODO Add openAnimation as an option
+// @TODO Add defaults for modal-right, modal-left, modal-top, modal-bottomhkuj
 
 // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
 // 'container' and adds remote HTML to it).
@@ -91,7 +92,10 @@ var Modal = function(options) {
     });
   };
 
+  //---------------------------------------------------------------------------
   // Capture events to check if ESC key was pressed
+  //---------------------------------------------------------------------------
+
   $(document).keyup(function(event) {
     if (event.keyCode == 27) {
       self.dismiss();
