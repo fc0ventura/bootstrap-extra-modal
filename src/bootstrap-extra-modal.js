@@ -102,7 +102,7 @@ var Modal = function(options) {
   $(document).click(function(e){
     if (self.options.position === 'default') {
       // Check if click was not triggered on or within .modal-dialog
-      if ($(e.target).closest('.modal-dialog').length == 0) self.dismiss();
+      if ($(e.target).closest('.modal-dialog').length === 0) self.dismiss();
     }
   });
-}
+};
