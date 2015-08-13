@@ -9,6 +9,7 @@
   <meta name="author" content="Vasco Gaspar">
 
   <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap-extra-modal.css">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,10 +17,56 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js" type="text/javascript"></script>
   <script src="vendor/js/bootstrap.js" type="text/javascript"></script>
-  <script src="src/bootstrap-extra-modal.js" type="text/javascript"></script>
+  <script src="bootstrap-extra-modal.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <h1>Hello Github. This is a project page</h1>
+  <div class="container push-content">
+    <button class="btn btn-primary js-open-modal">Open Modal</button>
+    <button class="btn btn-primary js-open-modal-right">Open Right Modal</button>
+    <button class="btn btn-primary js-open-modal-left">Open Left Modal</button>
+  </div>
+
+
+  <div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('.js-open-modal').click(function() {
+      $('#ajaxModal').bootstrapExtraModal({
+        css: 'test',
+        backdrop: true
+      }).content().show();
+    });
+
+    $('.js-open-modal-right').click(function() {
+      $('#ajaxModal').bootstrapExtraModal({
+        position: 'right',
+        backdrop: true,
+        pushContent: true
+      }).content().show();
+    });
+
+    $('.js-open-modal-left').click(function() {
+      $('#ajaxModal').bootstrapExtraModal({
+        position: 'left'
+      }).content().show();
+    });
+  </script>
 </body>
 </html>

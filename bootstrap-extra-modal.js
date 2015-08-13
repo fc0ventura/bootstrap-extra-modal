@@ -1,27 +1,27 @@
-// @TODO Transform this info a jQuery Plugin
-// @TODO Add $(selector) as an option
-// @TODO Add openAnimation as an option
-// @TODO Add defaults for modal-right, modal-left, modal-top, modal-bottomhkuj
+// @TODO Add defaults for modal-right, modal-left, modal-top, modal-bottom
+// @TODO Add "push content" option
 
 // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
 // 'container' and adds remote HTML to it).
-var Modal = function(options) {
+$.fn.bootstrapExtraModal = function(options) {
   var self = this;
 
   var defaults = {
-    backdrop: 'static', // [BS setting] boolean or the string 'static'
+    backdrop: true, // [BS setting] boolean or the string 'static'
     keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed
-    element: '#ajax-modal', // the selector for the modal (the container on the DOM)
     reload: false, // reload page when closing the modal
-    position: 'default', // position of the modal (can be 'default' or 'right')
+    position: 'default', // position of the modal (can be 'default', 'right', 'left', 'top' or 'bottom')
     css: '',
-    closeAnimation: 'unjelly'
+    openAnimation: 'jelly',
+    closeAnimation: 'unjelly',
+    pushContent: false, // Option used to move the boby
   };
 
   this.options = $.extend(defaults, options || {});
 
-  var $element = $(self.options.element),
-      $backdrop = null;
+  var $element = $(this),
+      $backdrop = null,
+      $direction = self.options.position;
 
   // Add custom css class to modal
   $element.addClass(self.options.css);
@@ -45,6 +45,36 @@ var Modal = function(options) {
 
     // Initialize the BS modal
     $element.modal(this.options);
+    $element.css('display', 'block');
+
+    // Set modal type defaults
+    switch (self.options.position) {
+      case 'right':
+        self.options.openAnimation = 'slide-right';
+        self.options.closeAnimation = 'unslide-right';
+        self.options.css = 'modal-right';
+        $element.addClass(self.options.css + ' ' + self.options.openAnimation);
+
+        if (self.options.pushContent) {
+          $('.push-content').addClass('pushed pushed-' + $direction);
+        }
+        break;
+      case 'left':
+        self.options.openAnimation = 'slide-left';
+        self.options.closeAnimation = 'unslide-left';
+        self.options.css = 'modal-left';
+        $element.addClass(self.options.css + ' ' + self.options.openAnimation);
+        break;
+      case 'top':
+        $element.addClass('modal-top');
+        break;
+      case 'bottom':
+        $element.addClass('modal-bottom');
+        break;
+      default:
+        $element.removeClass
+        $element.addClass(self.options.openAnimation);
+    }
 
     $backdrop = $('.modal-backdrop');
 
@@ -62,15 +92,22 @@ var Modal = function(options) {
   //---------------------------------------------------------------------------
   this.dismiss = function() {
     $element.removeClass(self.options.closeAnimation);
+    $element.removeClass(self.options.openAnimation);
     $element.addClass(self.options.closeAnimation);
 
     $backdrop.addClass('fade-out');
     $backdrop.removeClass('in');
 
+    if (self.options.pushContent) {
+      $('.push-content').removeClass('pushed pushed-' + $direction);
+      $('.push-content').addClass('unpushed unpushed-' + $direction);
+    }
+
     setTimeout(function() {
       $element.modal('hide');
       $element.removeClass(self.options.css);
       $element.removeClass(self.options.closeAnimation);
+      $('.push-content').removeClass('unpushed unpushed-' + $direction);
       self.options.closeAnimation = '';
 
       if (self.options.reload) { location.reload(); }
@@ -81,13 +118,10 @@ var Modal = function(options) {
   // Initializes objects and libraries that require the modal to be opened.
   //---------------------------------------------------------------------------
   this.afterShow = function() {
-    CopyClipboard.initialize();
-    LoadingButtons.initialize();
-
     // Modal dismiss button
-    $('.js-dismiss-modal').click(function() { self.dismiss(); });
     $('[data-dismiss="modal"]').click(function(e) {
       e.preventDefault();
+      e.stopPropagation();
       self.dismiss();
     });
   };
@@ -102,11 +136,13 @@ var Modal = function(options) {
     }
   });
 
-  // Captures click event outside modal and dismisses it
-  $(document).click(function(e){
-    if (self.options.position === 'default') {
-      // Check if click was not triggered on or within .modal-dialog
-      if ($(e.target).closest('.modal-dialog').length === 0) self.dismiss();
+  $element.click(function(e){
+    // Check if click was not triggered on or within .modal-dialog
+    if (!$(e.target).closest('.modal-dialog').length > 0 && self.options.backdrop === true){
+      self.dismiss();
     }
   });
+
+
+  return self;
 };
