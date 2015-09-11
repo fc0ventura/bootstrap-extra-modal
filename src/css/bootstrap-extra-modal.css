@@ -1,4 +1,4 @@
-/* BS ovverides */
+/* BS overrides */
 
 .modal.in .modal-dialog {
   transition: none;
@@ -7,6 +7,7 @@
 /**************** Modal types ***************/
 
 /*Right drawer modal*/
+
 .modal.modal-right {
   transition: none;
   width: 624px;
@@ -60,16 +61,18 @@
   left: 0;
   right: auto;
   position: absolute;
+
+  .modal-dialog {
+    position: absolute;
+    margin: 0 !important;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 600px;
+  }
 }
 
-.modal.modal-left .modal-dialog {
-  position: absolute;
-  margin: 0 !important;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 600px;
-}
+.modal.modal-left {}
 
 .modal.modal-left .modal-content {
   position: absolute;
@@ -102,11 +105,6 @@
 
 
 /* Animations */
-
-.in {
-  -webkit-animation: none;
-  animation: none;
-}
 
 .jelly {
   -webkit-animation: jelly 400ms linear both;
@@ -151,8 +149,8 @@
 
 
 .unjelly {
-  -webkit-animation: unjelly 400ms linear both !important;
-  animation: unjelly 400ms linear both !important;
+  -webkit-animation: unjelly 400ms linear both;
+  animation: unjelly 400ms linear both;
 }
 
 @-webkit-keyframes unjelly {
@@ -196,8 +194,8 @@
 }
 
 .slide-right {
-  -webkit-animation: slide-right 925ms linear both !important;
-  animation: slide-right 925ms linear both !important;
+  -webkit-animation: slide-right 925ms linear both;
+  animation: slide-right 925ms linear both;
 }
 
 /* Generated with Bounce.js. Edit at http://goo.gl/DyMoJQ */
@@ -227,8 +225,8 @@
 }
 
 .unslide-right {
-  -webkit-animation: unslide-right 925ms linear both!important;
-  animation: unslide-right 925ms linear both!important;
+  -webkit-animation: unslide-right 925ms linear both;
+  animation: unslide-right 925ms linear both;
 }
 
 /* Generated with Bounce.js. Edit at http://goo.gl/gYQmA3 */
@@ -289,8 +287,6 @@
   50.05% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.063, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.063, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
-
-
 
 .unslide-left {
   -webkit-animation: unslide-left 925ms linear both;

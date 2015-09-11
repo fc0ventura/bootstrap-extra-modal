@@ -7,7 +7,7 @@ $.fn.bootstrapExtraModal = function(options) {
   var self = this;
 
   var defaults = {
-    backdrop: true, // [BS setting] boolean or the string 'static'
+    backdrop: 'static', // [BS setting] boolean or the string 'static'
     keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed
     reload: false, // reload page when closing the modal
     position: 'default', // position of the modal (can be 'default', 'right', 'left', 'top' or 'bottom')
@@ -33,6 +33,8 @@ $.fn.bootstrapExtraModal = function(options) {
   this.content = function(contentHTML) {
     var dialog = $element.find('.modal-dialog');
     dialog.html(contentHTML);
+
+
     return this;
   };
 
@@ -138,7 +140,7 @@ $.fn.bootstrapExtraModal = function(options) {
 
   $element.click(function(e){
     // Check if click was not triggered on or within .modal-dialog
-    if (!$(e.target).closest('.modal-dialog').length > 0 && self.options.backdrop === true){
+    if (!$(e.target).closest('.modal-dialog').length > 0){
       self.dismiss();
     }
   });
