@@ -3,4 +3,6 @@
 #Work in progress
 
 ## Run:
-```grunt watch```
+```shell
+grunt watch
+```
