@@ -5,7 +5,11 @@
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0"
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-postcss": "^0.6.0",
+    "postcss-scss": "^0.1.2",
+    "precss": "^1.1.2"
   },
   "description": "",
   "main": "bootstrap-extra-modal.js",
