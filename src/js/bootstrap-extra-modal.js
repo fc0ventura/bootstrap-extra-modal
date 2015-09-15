@@ -1,156 +1,163 @@
-// @TODO Refactor everything to be more like Object Oriented
+$(function(){
 
-// A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
-// 'container' and adds remote HTML to it).
-$.fn.bootstrapExtraModal = function(options) {
-  var self = this;
+  // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
+  // 'container' and adds remote HTML to it).
+  $.fn.bootstrapExtraModal = function(options) {
+    // just some default vals.
+  	var defaults = $.extend({
+      backdrop:         'static', // [BS setting] boolean or the string 'static'
+      keyboard:         false, // [BS setting] if true - closes the modal when escape key is pressed
+      reload:           false, // reload page when closing the modal
+      position:         'default', // position of the modal (can be 'default', 'right', 'left')
+      css:              '', // custom css class to be added to the modal container
+      openAnimation:    'jelly', // default open animation
+      closeAnimation:   'unjelly', // default close animation
+      pushContent:      false, // Option used to move the boby
+  	}, options);
 
-  var defaults = {
-    backdrop: 'static', // [BS setting] boolean or the string 'static'
-    keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed
-    reload: false, // reload page when closing the modal
-    position: 'default', // position of the modal (can be 'default', 'right', 'left')
-    css: '', // custom css class to be added to the modal container
-    openAnimation: 'jelly', // default open animation
-    closeAnimation: 'unjelly', // default close animation
-    pushContent: false, // Option used to move the boby
-  };
+    //  Global variables
+    var $element    = $(this),
+        $content    = $element.find('.modal-dialog'),
+        $backdrop   = null;
 
-  this.options = $.extend(defaults, options || {});
-
-  var $element = $(this),
-      $backdrop = null,
-      $direction = self.options.position;
-
-  // Add custom css class to modal
-  $element.addClass(self.options.css);
-
-  //---------------------------------------------------------------------------
-  // Set the modal HTML content. This function will attach the DOM HTML to the
-  // modal container that is already on the page.
-  //---------------------------------------------------------------------------
-  this.content = function(contentHTML) {
-    var dialog = $element.find('.modal-dialog');
-    dialog.html(contentHTML);
-
-    return this;
-  };
-
-  //---------------------------------------------------------------------------
-  // Show the modal. You should always call this.content() first to build the
-  // modal DOM.
-  //---------------------------------------------------------------------------
-  this.show = function() {
-    $element.removeClass(self.options.closeAnimation);
-
-    // Initialize the BS modal
-    $element.modal(self.options);
-    $element.css('display', 'block');
-
-    // Set modal type defaults
-    switch (self.options.position) {
-      case 'right':
-        self.options.openAnimation = 'slide-right';
-        self.options.closeAnimation = 'unslide-right';
-        self.options.css = 'modal-right';
-        $element.addClass(self.options.css + ' ' + self.options.openAnimation);
-        self.pushContent('push-right');
-        break;
-      case 'left':
-        self.options.openAnimation = 'slide-left';
-        self.options.closeAnimation = 'unslide-left';
-        self.options.css = 'modal-left';
-        $element.addClass(self.options.css + ' ' + self.options.openAnimation);
-        self.pushContent('push-left');
-        break;
-      default:
-        $element.addClass(self.options.openAnimation);
-        console.log(self.options.position);
-    }
-
-    $backdrop = $('.modal-backdrop');
-
-    // Dismiss the modal when clicking on the backdrop
-    $backdrop.click(function() { self.dismiss(); });
-
-    this.afterShow();
-
-    return $element;
-  };
-
-  this.pushContent = function(animation) {
-    if (self.options.pushContent && self.options.position === 'right') {
-      $('.push-content').addClass(animation);
-    } else if (self.options.pushContent && self.options.position === 'left') {
-      $('.push-content').addClass(animation);
-    }
-    return;
-  };
-
-
-
-  //---------------------------------------------------------------------------
-  // Dismisses the modal. It also reloads the current page if options.reload is
-  // set to true or it received reload parameter.
-  //---------------------------------------------------------------------------
-  this.dismiss = function() {
-    $element.removeClass(self.options.closeAnimation);
-    $element.removeClass(self.options.openAnimation);
-    $element.addClass(self.options.closeAnimation);
-
-    $backdrop.addClass('fade-out');
-    $backdrop.removeClass('in');
-
-    if (self.options.pushContent && self.options.position === 'right') {
-      self.pushContent('unpush-right');
-    } else if (self.options.pushContent && self.options.position === 'left') {
-      self.pushContent('unpush-left');
+    // private methods
+    var pushContent = function(animation) {
+      if ((defaults.pushContent) && (defaults.position === 'left' || defaults.position === 'right')) {
+        $('.push-content').addClass(animation);
+      }
+      return;
     };
 
-    setTimeout(function() {
-      $element.modal('hide');
-      $element.removeClass(self.options.css);
-      $element.removeClass(self.options.closeAnimation);
-      self.options.closeAnimation = '';
-      self.options.position = '';
+    var afterShow = function() {
+      // Modal dismiss button
+      $('[data-dismiss="modal"]').click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        modal.hide();
+      });
+    };
 
-      if (self.options.pushContent) {
-        $('.push-content').removeClass('push-right unpush-right push-left unpush-left');
-      };
+    // public methods
+    var modal = {
 
-      if (self.options.reload) { location.reload(); }
-    }, 200);
-  };
+      show: function() {
+        $element.removeClass(defaults.closeAnimation);
 
-  //---------------------------------------------------------------------------
-  // Initializes objects and libraries that require the modal to be opened.
-  //---------------------------------------------------------------------------
-  this.afterShow = function() {
-    // Modal dismiss button
-    $('[data-dismiss="modal"]').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      self.dismiss();
+        // Initialize the BS modal
+        $element.modal(defaults);
+        $element.css('display', 'block');
+
+        $element.addClass(defaults.css);
+
+        // Set modal type defaults
+        switch (defaults.position) {
+          case 'right':
+            defaults.openAnimation = 'slide-right';
+            defaults.closeAnimation = 'unslide-right';
+            defaults.css = 'modal-right';
+            $element.addClass(defaults.css + ' ' + defaults.openAnimation);
+            pushContent('push-right');
+            break;
+          case 'left':
+            defaults.openAnimation = 'slide-left';
+            defaults.closeAnimation = 'unslide-left';
+            defaults.css = 'modal-left';
+            $element.addClass(defaults.css + ' ' + defaults.openAnimation);
+            pushContent('push-left');
+            break;
+          default:
+            $element.addClass(defaults.openAnimation);
+        };
+
+        // Dismiss the modal when clicking on the backdrop
+        $backdrop = $('.modal-backdrop');
+        $backdrop.click(function() { modal.hide(); });
+
+        afterShow();
+
+        return $element;
+  	  },
+
+      hide: function() {
+        $element.removeClass(defaults.closeAnimation);
+        $element.removeClass(defaults.openAnimation);
+        $element.addClass(defaults.closeAnimation);
+
+        $backdrop = $('.modal-backdrop');
+        $backdrop.addClass('fade-out');
+        $backdrop.removeClass('in');
+
+        if (defaults.pushContent && defaults.position === 'right') {
+          pushContent('unpush-right');
+        } else if (defaults.pushContent && defaults.position === 'left') {
+          pushContent('unpush-left');
+        };
+
+        setTimeout(function() {
+          $element.modal('hide');
+          $element.removeClass(defaults.css);
+          $element.removeClass(defaults.closeAnimation);
+          defaults.closeAnimation = '';
+          defaults.position = '';
+
+          if (defaults.pushContent) {
+            $('.push-content').removeClass('push-right unpush-right push-left unpush-left');
+          };
+
+          if (defaults.reload) { location.reload(); }
+          modal.content();
+        }, 200);
+
+
+      },
+
+      content: function(html) {
+        if (html) {
+          $content.html(html);
+          return this;
+        }
+      }
+    };
+
+
+    //---------------------------------------------------------------------------
+    // Capture events to check if ESC key was pressed
+    //---------------------------------------------------------------------------
+
+    $(document).keyup(function(event) {
+      if (event.keyCode == 27) {
+        modal.hide();
+      }
     });
+
+    $element.click(function(e){
+      // Check if click was not triggered on or within .modal-dialog
+      if (!$(e.target).closest('.modal-dialog').length > 0 && defaults.backdrop){
+        e.preventDefault();
+        e.stopPropagation();
+        modal.hide();
+      }
+    });
+
+  	return modal;
   };
 
+
   //---------------------------------------------------------------------------
-  // Capture events to check if ESC key was pressed
+  // Initialize the plugin via data attributes
   //---------------------------------------------------------------------------
 
-  $(document).keyup(function(event) {
-    if (event.keyCode == 27) {
-      self.dismiss();
-    }
+  var $triggers = $("[data-em-selector]");
+
+  $triggers.each(function() {
+    var data = $(this).data();
+
+    $(this).click(function() {
+      $(data.emSelector).bootstrapExtraModal({
+        position:         data.emPosition, // position of the modal (can be 'default', 'right', 'left')
+        pushContent:      data.emPushContent, // Option used to move the boby
+      }).show();
+    })
   });
 
-  $element.click(function(e){
-    // Check if click was not triggered on or within .modal-dialog
-    if (!$(e.target).closest('.modal-dialog').length > 0){
-      self.dismiss();
-    }
-  });
-
-
-  return self;
-};
+});
