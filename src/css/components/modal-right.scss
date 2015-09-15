@@ -1,0 +1,44 @@
+/*Right drawer modal*/
+
+.modal.modal-right {
+  width: 624px;
+  right: 0;
+  position: absolute;
+  left: auto;
+
+  .modal-dialog {
+    position: absolute;
+    margin: 0 !important;
+    right: 0;
+    height: 100%;
+    width: 600px;
+  }
+
+  .modal-content {
+    position: absolute;
+    height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+    width: 600px;
+  }
+
+  .close {
+    background: white;
+    position: fixed;
+    right: 596px;
+    top: 33px;
+    opacity: 1;
+    color: #666;
+    border-radius: 4px 0 0 4px;
+    line-height: 0;
+    width: 26px;
+    height: 26px;
+    outline: 0 !important;
+    z-index: 1000;
+
+    &:hover {
+      color: #333;
+      right: 593px;
+    }
+  }
+}

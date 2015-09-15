@@ -10,7 +10,7 @@
     "grunt-contrib-watch": "^0.6.1"
   },
   "description": "",
-  "main": "bootstrap-extra-modal.js",
+  "main": "dist/js/bootstrap-extra-modal.js",
   "dependencies": {
     "jquery": "^2.1.4"
   },
