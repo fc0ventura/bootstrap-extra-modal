@@ -47,7 +47,7 @@ $(function(){
         $element.modal(defaults);
         $element.css('display', 'block');
 
-        $element.addClass(defaults.css);
+        $element.addClass(defaults.css + ' bs-extra-modal');
 
         // Set modal type defaults
         switch (defaults.position) {
@@ -106,7 +106,7 @@ $(function(){
 
           if (defaults.reload) { location.reload(); }
           modal.content();
-        }, 200);
+        }, 300);
 
 
       },

@@ -1,5 +1,9 @@
 /* BS overrides */
 
+.modal {
+  @include transform(translateZ(0));
+}
+
 .modal.in .modal-dialog {
   transition: none;
 }
@@ -7,4 +11,8 @@
 .modal-backdrop {
   opacity: 0;
   @include animation('fade-in 200ms linear');
+}
+
+.modal.fade {
+  transition: none;
 }

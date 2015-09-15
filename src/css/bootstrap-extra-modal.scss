@@ -5,6 +5,7 @@
 // Components
 @import "components/modal-left";
 @import "components/modal-right";
+@import "components/keyframes";
 @import "components/animations";
 @import "components/overrides";
 
@@ -15,4 +16,5 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  @include transform(translateZ(0));
 }
