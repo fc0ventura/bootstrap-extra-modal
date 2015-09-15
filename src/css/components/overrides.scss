@@ -1,0 +1,10 @@
+/* BS overrides */
+
+.modal.in .modal-dialog {
+  transition: none;
+}
+
+.modal-backdrop {
+  opacity: 0;
+  @include animation('fade-in 200ms linear');
+}

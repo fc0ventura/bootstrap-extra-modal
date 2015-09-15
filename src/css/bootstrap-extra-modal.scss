@@ -1,0 +1,107 @@
+// Mixins
+@import "mixins/animations";
+@import "mixins/transform";
+
+// Components
+@import "components/animations";
+@import "components/overrides";
+
+/**************** Modal types ***************/
+
+/*Right drawer modal*/
+
+.modal.modal-right {
+  transition: none;
+  width: 624px;
+  right: 0;
+  position: absolute;
+  left: auto;
+}
+
+.modal.modal-right .modal-dialog {
+  position: absolute;
+  margin: 0 !important;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 600px;
+}
+
+.modal.modal-right .modal-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 0;
+  overflow-y: auto;
+  width: 600px;
+}
+
+.modal.modal-right .close {
+  background: white;
+  position: fixed;
+  right: 596px;
+  top: 33px;
+  opacity: 1;
+  color: #666;
+  border-radius: 4px 0 0 4px;
+  line-height: 0;
+  width: 26px;
+  height: 26px;
+  outline: 0 !important;
+  z-index: 1000;
+}
+
+.modal.modal-right .close:hover {
+  color: #333;
+  right: 593px;
+}
+
+/*Left drawer modal*/
+.modal.modal-left {
+  transition: none;
+  width: 624px;
+  left: 0;
+  right: auto;
+  position: absolute;
+
+  .modal-dialog {
+    position: absolute;
+    margin: 0 !important;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 600px;
+  }
+}
+
+
+.modal.modal-left .modal-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 0;
+  overflow-y: auto;
+  width: 600px;
+}
+
+.modal.modal-left .close {
+  background: white;
+  position: fixed;
+  left: 596px;
+  top: 33px;
+  opacity: 1;
+  color: #666;
+  border-radius: 0px 4px 4px 0px;
+  line-height: 0;
+  width: 26px;
+  height: 26px;
+  outline: 0 !important;
+  z-index: 1000;
+}
+
+.modal.modal-left .close:hover {
+  color: #333;
+  left: 593px;
+}

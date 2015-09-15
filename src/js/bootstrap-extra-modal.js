@@ -1,5 +1,4 @@
-// @TODO Add defaults for modal-right, modal-left, modal-top, modal-bottom
-// @TODO Add "push content" option
+// @TODO Refactor everything to be more like Object Oriented
 
 // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
 // 'container' and adds remote HTML to it).
@@ -10,10 +9,10 @@ $.fn.bootstrapExtraModal = function(options) {
     backdrop: 'static', // [BS setting] boolean or the string 'static'
     keyboard: false, // [BS setting] if true - closes the modal when escape key is pressed
     reload: false, // reload page when closing the modal
-    position: 'default', // position of the modal (can be 'default', 'right', 'left', 'top' or 'bottom')
-    css: '',
-    openAnimation: 'jelly',
-    closeAnimation: 'unjelly',
+    position: 'default', // position of the modal (can be 'default', 'right', 'left')
+    css: '', // custom css class to be added to the modal container
+    openAnimation: 'jelly', // default open animation
+    closeAnimation: 'unjelly', // default close animation
     pushContent: false, // Option used to move the boby
   };
 
@@ -34,7 +33,6 @@ $.fn.bootstrapExtraModal = function(options) {
     var dialog = $element.find('.modal-dialog');
     dialog.html(contentHTML);
 
-
     return this;
   };
 
@@ -46,7 +44,7 @@ $.fn.bootstrapExtraModal = function(options) {
     $element.removeClass(self.options.closeAnimation);
 
     // Initialize the BS modal
-    $element.modal(this.options);
+    $element.modal(self.options);
     $element.css('display', 'block');
 
     // Set modal type defaults
@@ -56,26 +54,18 @@ $.fn.bootstrapExtraModal = function(options) {
         self.options.closeAnimation = 'unslide-right';
         self.options.css = 'modal-right';
         $element.addClass(self.options.css + ' ' + self.options.openAnimation);
-
-        if (self.options.pushContent) {
-          $('.push-content').addClass('pushed pushed-' + $direction);
-        }
+        self.pushContent('push-right');
         break;
       case 'left':
         self.options.openAnimation = 'slide-left';
         self.options.closeAnimation = 'unslide-left';
         self.options.css = 'modal-left';
         $element.addClass(self.options.css + ' ' + self.options.openAnimation);
-        break;
-      case 'top':
-        $element.addClass('modal-top');
-        break;
-      case 'bottom':
-        $element.addClass('modal-bottom');
+        self.pushContent('push-left');
         break;
       default:
-        $element.removeClass
         $element.addClass(self.options.openAnimation);
+        console.log(self.options.position);
     }
 
     $backdrop = $('.modal-backdrop');
@@ -87,6 +77,17 @@ $.fn.bootstrapExtraModal = function(options) {
 
     return $element;
   };
+
+  this.pushContent = function(animation) {
+    if (self.options.pushContent && self.options.position === 'right') {
+      $('.push-content').addClass(animation);
+    } else if (self.options.pushContent && self.options.position === 'left') {
+      $('.push-content').addClass(animation);
+    }
+    return;
+  };
+
+
 
   //---------------------------------------------------------------------------
   // Dismisses the modal. It also reloads the current page if options.reload is
@@ -100,17 +101,22 @@ $.fn.bootstrapExtraModal = function(options) {
     $backdrop.addClass('fade-out');
     $backdrop.removeClass('in');
 
-    if (self.options.pushContent) {
-      $('.push-content').removeClass('pushed pushed-' + $direction);
-      $('.push-content').addClass('unpushed unpushed-' + $direction);
-    }
+    if (self.options.pushContent && self.options.position === 'right') {
+      self.pushContent('unpush-right');
+    } else if (self.options.pushContent && self.options.position === 'left') {
+      self.pushContent('unpush-left');
+    };
 
     setTimeout(function() {
       $element.modal('hide');
       $element.removeClass(self.options.css);
       $element.removeClass(self.options.closeAnimation);
-      $('.push-content').removeClass('unpushed unpushed-' + $direction);
       self.options.closeAnimation = '';
+      self.options.position = '';
+
+      if (self.options.pushContent) {
+        $('.push-content').removeClass('push-right unpush-right push-left unpush-left');
+      };
 
       if (self.options.reload) { location.reload(); }
     }, 200);

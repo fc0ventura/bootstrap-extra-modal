@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/js/<%= pkg.name %>.js'],
+        files: ['src/js/<%= pkg.name %>.js', 'src/js/refactor.js'],
         tasks: ['uglify'],
         options: {
           spawn: false,
@@ -14,8 +14,8 @@ module.exports = function(grunt) {
       },
 
       css: {
-        files: ['src/css/*.css'],
-        tasks: ['postcss']
+        files: ['src/css/*.scss', 'src/css/**/*.scss'],
+        tasks: ['sass']
       }
     },
     uglify: {
@@ -23,25 +23,16 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> by Vasco Gaspar */\n/*! Last Updated: <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'src/js/<%= pkg.name %>.js',
-        dest: 'dist/js/<%= pkg.name %>.min.js'
+        src: 'src/js/*.js',
+        dest: 'dist/js/*.min.js'
       }
     },
 
-    postcss: {
-      options: {
-        map: true, // inline sourcemaps
-        parser: require('postcss-scss'),
-        processors: [
-          require('pixrem')(), // add fallbacks for rem units
-          require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
-          require('cssnano')(), // minify the result
-          require('precss')() // SASS like syntax
-        ]
-      },
+    sass: {
       dist: {
-        src: 'src/css/*.css',
-        dest: 'dist/css/<%= pkg.name %>.css'
+        files: {
+          'dist/css/<%= pkg.name %>.css': 'src/css/<%= pkg.name %>.scss'
+        }
       }
     }
   });
@@ -49,13 +40,13 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // PostCSS Task
-  grunt.loadNpmTasks('grunt-postcss');
+  // Comiple SCSS Files to CSS
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Whatch for file changes and run default tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify'], ['postcss']);
+  grunt.registerTask('default', ['uglify', 'sass']);
 
 };
