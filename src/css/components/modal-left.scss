@@ -8,7 +8,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: 600px;
+    width: $modal-width;
   }
 
   .modal-content {
@@ -16,7 +16,7 @@
     height: 100%;
     border-radius: 0;
     overflow-y: auto;
-    width: 600px;
+    width: $modal-width;
   }
 
   &.size-sm {
