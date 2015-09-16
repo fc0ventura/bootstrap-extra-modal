@@ -54,3 +54,6 @@ Then:
 ```shell
 grunt watch
 ```
+
+## Contributing
+Pull Requests are always welcome!
