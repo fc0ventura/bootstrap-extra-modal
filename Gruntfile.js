@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       },
 
       css: {
-        files: ['src/css/*.scss', 'src/css/**/*.scss'],
+        files: ['src/scss/*.scss', 'src/scss/**/*.scss'],
         tasks: ['sass']
       }
     },
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/css/<%= pkg.name %>.css': 'src/css/<%= pkg.name %>.scss'
+          'dist/css/<%= pkg.name %>.css': 'src/scss/<%= pkg.name %>.scss'
         }
       }
     }
