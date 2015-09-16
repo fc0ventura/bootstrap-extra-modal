@@ -13,7 +13,7 @@ npm install bootstrap-extra-modal
 ```
 
 ### Manually
-[Download the project]() and include the sources inside your head tag.
+[Download the project](https://github.com/vascogaspar/bootstrap-extra-modal/archive/gh-pages.zip) and include the sources inside your head tag.
 Make sure you include the files **after** including jQuery and Bootstrap 3 sources
 
 ```html
