@@ -19,24 +19,13 @@
     overflow-y: auto;
     width: 600px;
   }
-}
 
-.modal.modal-left .close {
-  background: white;
-  position: fixed;
-  left: 596px;
-  top: 33px;
-  opacity: 1;
-  color: #666;
-  border-radius: 0px 4px 4px 0px;
-  line-height: 0;
-  width: 26px;
-  height: 26px;
-  outline: 0 !important;
-  z-index: 1000;
-}
+  &.size-sm {
+    width: 312px;
 
-.modal.modal-left .close:hover {
-  color: #333;
-  left: 593px;
+    .modal-dialog,
+    .modal-content {
+      width: 300px;
+    }
+  }
 }

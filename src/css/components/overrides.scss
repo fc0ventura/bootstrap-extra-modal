@@ -10,7 +10,7 @@
 
 .modal-backdrop {
   opacity: 0;
-  @include animation('fade-in 200ms linear');
+  @include animation('fade-in 350ms cubic-bezier(0.15, 0.74, 0.26, 1.04)');
 }
 
 .modal.fade {
