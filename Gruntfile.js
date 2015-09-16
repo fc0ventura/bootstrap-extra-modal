@@ -4,10 +4,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    jshint: {
+      files: ['Gruntfile.js', 'src/**/*.js'],
+      options: {
+        globals: {
+          jQuery: true
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: ['src/js/<%= pkg.name %>.js', 'src/js/refactor.js'],
-        tasks: ['uglify'],
+        tasks: ['jshint', 'uglify'],
         options: {
           spawn: false,
         },
@@ -29,6 +38,10 @@ module.exports = function(grunt) {
     },
 
     sass: {
+      options: {
+        style: 'compressed',
+        precision: 5
+      },
       dist: {
         files: {
           'dist/css/<%= pkg.name %>.css': 'src/css/<%= pkg.name %>.scss'
@@ -40,13 +53,16 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // Comiple SCSS Files to CSS
+  // Compile SCSS Files to CSS
   grunt.loadNpmTasks('grunt-contrib-sass');
+
+  // Check for JS code quality
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Whatch for file changes and run default tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify', 'sass']);
+  grunt.registerTask('default', ['uglify', 'sass', 'jshint']);
 
 };
