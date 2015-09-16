@@ -1,7 +1,6 @@
 /*Left drawer modal*/
 .modal.modal-left {
-  width: 624px;
-  position: absolute;
+  width: $modal-width;
 
   .modal-dialog {
     position: absolute;
@@ -21,11 +20,11 @@
   }
 
   &.size-sm {
-    width: 312px;
+    width: $modal-width / 2;
 
     .modal-dialog,
     .modal-content {
-      width: 300px;
+      width: $modal-width / 2;
     }
   }
 }

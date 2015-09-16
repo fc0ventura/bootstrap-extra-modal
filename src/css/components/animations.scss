@@ -2,7 +2,12 @@
 
 // Default Modal animations
 
+// Encapsulate classes in .bs-extra-modal class
 .bs-extra-modal {
+  &.size-sm {
+    $modal-width: $modal-width / 2;
+  }
+
   &.jelly {
     @include animation('jelly 800ms linear both');
   }

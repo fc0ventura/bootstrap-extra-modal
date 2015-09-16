@@ -20,7 +20,7 @@ $(function(){
         $content    = $element.find('.modal-dialog'),
         $backdrop   = null;
 
-    // private methods
+    // Private Methods
     var pushContent = function(animation) {
       if ((defaults.pushContent) && (defaults.position === 'left' || defaults.position === 'right')) {
         $('.push-content').addClass(animation);
@@ -37,7 +37,7 @@ $(function(){
       });
     };
 
-    // public methods
+    // Public Methods
     var modal = {
 
       show: function() {
@@ -67,7 +67,7 @@ $(function(){
             break;
           default:
             $element.addClass(defaults.openAnimation);
-        };
+        }
 
         // Dismiss the modal when clicking on the backdrop
         $backdrop = $('.modal-backdrop');
@@ -91,7 +91,7 @@ $(function(){
           pushContent('unpush-right');
         } else if (defaults.pushContent && defaults.position === 'left') {
           pushContent('unpush-left');
-        };
+        }
 
         setTimeout(function() {
           $element.modal('hide');
@@ -102,7 +102,7 @@ $(function(){
 
           if (defaults.pushContent) {
             $('.push-content').removeClass('push-right unpush-right push-left unpush-left');
-          };
+          }
 
           if (defaults.reload) { location.reload(); }
           modal.content();
@@ -131,8 +131,8 @@ $(function(){
     });
 
     $element.click(function(e){
-      // Check if click was not triggered on or within .modal-dialog
-      if (!$(e.target).closest('.modal-dialog').length > 0 && defaults.backdrop){
+      // Check if click was not triggered on nor within .modal-dialog
+      if ($(e.target).closest('.modal-dialog').length === 0 && defaults.backdrop){
         e.preventDefault();
         e.stopPropagation();
         modal.hide();
@@ -157,7 +157,7 @@ $(function(){
         position:         data.emPosition, // position of the modal (can be 'default', 'right', 'left')
         pushContent:      data.emPushContent, // Option used to move the boby
       }).show();
-    })
+    });
   });
 
 });

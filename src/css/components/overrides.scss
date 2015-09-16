@@ -1,18 +1,20 @@
 /* BS overrides */
 
 .modal {
-  @include transform(translateZ(0));
-}
+  @include transform(translate3d(0, 0, 0));
 
-.modal.in .modal-dialog {
-  transition: none;
+  &.fade {
+    transition: none;
+  }
+
+  &.in {
+    .modal-dialog {
+      transition: none;
+    }
+  }
 }
 
 .modal-backdrop {
   opacity: 0;
-  @include animation('fade-in 350ms cubic-bezier(0.15, 0.74, 0.26, 1.04)');
-}
-
-.modal.fade {
-  transition: none;
+  @include animation('fade-in 250ms cubic-bezier(0.77, 0, 0.175, 1)');
 }

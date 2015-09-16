@@ -36,41 +36,41 @@
 }
 
 @include keyframes('slide-right') {
-  0%    { right: -624px; }
-  100%  { right: 0px}
+  0%    { @include transform(translateX(100%)); }
+  100%  { @include transform(translateX(0%)); }
 }
 
 @include keyframes('unslide-right') {
-  0%    { right: 0px; }
-  100%  { right: -624px}
+  0%    { @include transform(translateX(0%)); }
+  100%  { @include transform(translateX(100%)); }
 }
 
 @include keyframes('slide-left') {
-  0%    { left: -624px; }
-  100%  { left: 0px}
+  0%    { @include transform(translateX(-100%)); }
+  100%  { @include transform(translateX(0%)); }
 }
 
 @include keyframes('unslide-left') {
-  0%    { left: 0px; }
-  100%  { left: -624px}
+  0%    { @include transform(translateX(0%)); }
+  100%  { @include transform(translateX(-100%));}
 }
 
 @include keyframes('push-right') {
-  0%    {left:0;}
-  100%  { left: -250px}
+  0%    { @include transform(translateX(0%)); }
+  100%  { @include transform(translateX(-200px));}
 }
 
 @include keyframes('unpush-right') {
-  0%    { left: -250px;}
-  100%  { left: 0px}
+  0%    { @include transform(translateX(-200px)); }
+  100%  { @include transform(translateX(0%));}
 }
 
 @include keyframes('push-left') {
-  0%    { left:0; }
-  100%  { left: 250px}
+  0%    { @include transform(translateX(0%)); }
+  100%  { @include transform(translateX(200px));}
 }
 
 @include keyframes('unpush-left') {
-  0%    { left: 250px; }
-  100%  { left: 0px}
+  0%    { @include transform(translateX(200px)); }
+  100%  { @include transform(translateX(0%));}
 }
