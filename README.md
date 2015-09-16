@@ -25,7 +25,16 @@ Make sure you include the files **after** including jQuery and Bootstrap 3 sourc
 ```
 
 ## How to use:
-### Via data-attributes
+### Via data attributes
+```html
+<button data-em-selector="#fancyModal" data-em-position="left" data-em-push-content="true">Ignite!</button>
+```
+
+### Via JavaScript
+```javascript
+$('#fancyModal').bootstrapExtraModal(options).show();
+```
+
 
 ## Run:
 ```shell
