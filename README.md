@@ -37,7 +37,7 @@ $('#fancyModal').bootstrapExtraModal(options).show();
 
 ## Options
 | Name                 | Type           | Default    | Description  |   
-|----------------------|----------------|------------|--------------|
+|:----------------------|:----------------|:------------|:--------------|
 | position	   		  	| string	   		| 'default'  | Position of the modal (can be 'default', 'right', 'left') |
 | pushContent	  	   		| boolean			| false      | Option used to move the boby depending on 'position'| 
 | openAnimation      	| string      	| 'jelly'    | This will add a css class containing an animation|
