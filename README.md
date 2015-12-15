@@ -1,6 +1,6 @@
 #Bootstrap extra modal [Demo](http://vascogaspar.github.io/bootstrap-extra-modal/)
 
-A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal 'container' and adds remote HTML to it).
+A wrapper to the Bootstrap 3 modal Javascript we developed at [HOKO](https://hokolinks.com). It uses the HTML already on the page (the modal 'container' and adds remote HTML to it).
 
 ## Dependencies
 * [jQuery](http://jquery.com)
