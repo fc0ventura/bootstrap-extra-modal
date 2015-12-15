@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-
+  'use strict';
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -18,8 +18,8 @@ module.exports = function(grunt) {
         files: ['src/js/<%= pkg.name %>.js', 'src/js/refactor.js'],
         tasks: ['jshint', 'uglify'],
         options: {
-          spawn: false,
-        },
+          spawn: false
+        }
       },
 
       css: {
@@ -29,7 +29,11 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> by Vasco Gaspar */\n/*! Last Updated: <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*!\n' +
+            ' * Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author %>\n' +
+            ' * Licensed under the <%= pkg.license %> license\n' +
+            ' */\n'
       },
       build: {
         src: 'src/js/<%= pkg.name %>.js',
