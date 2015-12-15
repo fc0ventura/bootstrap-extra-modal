@@ -22,8 +22,9 @@
     "url": "git+https://github.com/vascogaspar/bootstrap-extra-modal.git"
   },
   "keywords": [
-    "jquery-plugin",
-    "ecosystem:jquery"
+    "jQuery",
+    "jQuery-plugin",
+    "Bootstrap"
   ],
   "author": "Vasco Gaspar",
   "license": "ISC",
