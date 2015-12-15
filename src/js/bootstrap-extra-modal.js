@@ -1,5 +1,4 @@
-$(function(){
-
+$(function(){  
   // A wrapper to the Bootstrap 3 modal Javascript. It uses the HTML already on the page (the modal
   // 'container' and adds remote HTML to it).
   $.fn.bootstrapExtraModal = function(options) {
