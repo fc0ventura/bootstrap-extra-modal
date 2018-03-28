@@ -29,7 +29,7 @@ $(function(){
 
     var afterShow = function() {
       // Modal dismiss button
-      $('[data-dismiss="modal"]').click(function(e) {
+      $element.find('[data-dismiss="modal"]').click(function(e) {
         e.preventDefault();
         e.stopPropagation();
         modal.hide();
